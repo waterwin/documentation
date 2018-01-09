@@ -20,6 +20,8 @@ A comprehensive guide to using the [Poplar](https://www.96boards.org/product/pop
    - Explore what makes your Poplar unique, technical specifications, schematics, hardware notes and more...
 - [Support](Support/)
    - From bug reports and current issues, to forum access and other useful resources, we want to help you find answers   
-- [Useful Guides](Guides/)
-  - These guides will help to get you started with a variety of available on-boards software
+
+## Guides
+
+  - [Gigabit NAS](Guides/gigabit-nas.md)
 ***
