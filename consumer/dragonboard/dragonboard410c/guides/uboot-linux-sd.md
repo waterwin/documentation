@@ -28,11 +28,11 @@ the kernel image and RFS (Root File System) on to SD card for booting.
 
 ## 1.1) Building and Flashing U-Boot
 
-The native U-Boot support for Dragonboard410c doesn't directly allows to fetch kernel and device tree blob from
+The native U-Boot support for Dragonboard410c doesn't directly allow to fetch kernel and device tree blob from
 SD card, it needs a bit of work to be done on the U-Boot command line. In order to eliminate this overhead, SD
 boot support has been added to the custom U-Boot tree.
 
-The following instructions allows to build and deploy patched version of U-Boot onto Dragonboard410c using Linux host.
+The following instructions allow to build and deploy patched version of U-Boot onto Dragonboard410c using Linux host.
 
 ```shell
 $ git clone https://github.com/Mani-Sadhasivam/u-boot.git
@@ -74,18 +74,18 @@ $ sudo fastboot flash boot u-boot.img
 
 # 2) Booting Linux Kernel
 
-Follwing instructions provides information about booting Linux kernel along with OE based distribution from U-Boot
+Following instructions provide information about booting Linux kernel along with OE based distribution from U-Boot
 
 ## 2.1) Preparing SD card
 
 SD card needs to be partitioned into ext4 filesystem for placing RFS and kernel image into it. Ideally, RFS should be
-placed in etx4 filesystem and kernel image should be in FAT based filesystem. But, for simplicity we can place kernel
+placed in ext4 filesystem and kernel image should be in FAT based filesystem. But, for simplicity we can place kernel
 image inside RFS.
 
-Partition SD card using any of the available disk utility like gparted, gdisk etc... It is mandatory to have etx4 as the
+Partition SD card using any of the available disk utilities like gparted, gdisk etc... It is mandatory to have ext4 as the
 first partition and of size >=500MB.
 
-Then, prebuilt RFS should be flashed on to the SD card.
+Then, prebuilt RFS should be flashed onto the SD card.
 
 ```shell
 $ wget http://builds.96boards.org/snapshots/reference-platform/openembedded/morty/dragonboard-410c/rpb/latest/rpb-desktop-image-dragonboard-410c-*.rootfs.ext4.gz
@@ -100,8 +100,8 @@ After flashing, ext4 partition should have populated with Linux Root File System
 
 ## 2.2) Booting Linux using U-Boot
 
-Now, Linux kernel needs to be complied and placed onto the SD card in order to allow U-Boot to load it. For
-compiling Linux kernel, refer release notes [here](http://releases.linaro.org/96boards/dragonboard410c/linaro/debian/latest/).
+Now, Linux kernel needs to be compiled and placed onto the SD card in order to allow U-Boot to load it. For
+compiling Linux kernel, refer to release notes [here](http://releases.linaro.org/96boards/dragonboard410c/linaro/debian/latest/).
 After compilation, generate U-Boot compatible Linux Image.
 
 ```shell
@@ -128,9 +128,9 @@ $ sudo cp arch/arm64/boot/dts/qcom/apq8016-sbc.dtb /path/to/boot
 ```
 > Note:
 > 1. Replace /path/to/boot with the path of *boot* directory in SD card's ext4 partition.
-> 2. Additionally, kernel modules can also be built and place onto */lib* directory in SD card which is optional.
+> 2. Additionally, kernel modules can also be built and placed onto */lib* directory in SD card which is optional.
 
-Next, **uEnv.txt** file needs to be placd in the */boot* partiton. So, create a file called **uEnv.txt** in */boot*
+Next, **uEnv.txt** file needs to be placd in the */boot* partition. So, create a file called **uEnv.txt** in */boot*
 partition and paste the following contents to it.
 
 ```
@@ -139,4 +139,4 @@ bootcmd=ext4load mmc 1:1 ${kernel_addr_r} /boot/uImage; ext4load mmc 1:1 ${fdt_a
 uenvcmd=run bootcmd
 ```
 Once the above mentioned steps are completed successfully, remove SD card from host and insert into Dragonboard410c and apply
-power. U-Boot will import environment variables from uEnv.txt and automatically boots Linux kernel.
+power. U-Boot will import environment variables from uEnv.txt and automatically boot Linux kernel.
